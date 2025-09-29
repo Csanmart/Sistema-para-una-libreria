@@ -4,7 +4,7 @@ require('dotenv').config()
 const sequelize = require("./Usuarios/config/db.config")
 // //rutas
 // const ProductRouters = require('./Productos/routers');
-// const UsuariosRouters = require('./Usuarios/routers');
+const UsuariosRouters = require('./Usuarios/routers/Usuario.routes');
 
 
 //Configuracion de express
@@ -21,7 +21,7 @@ app.use(cors());
 
 //App routes
 // app.use('/productos', ProductRouters);
-// app.use('/usuarios', UsuariosRouters);
+app.use('/usuarios', UsuariosRouters);
 
 //Configuracio del puerto
 app.listen(PORT, ()=>{
