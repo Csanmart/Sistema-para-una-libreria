@@ -27,6 +27,19 @@ const prestamos = new sequelize.define('prestamos',{
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
+    },
+    fecha_prestamo:{
+        type:DataTypes.DATE,
+        allowNull: false
+    },
+    fecha_devolucion:{
+        type:DataTypes.DATE,
+        allowNull: false
+    },
+    estado: {
+        type: DataTypes.ENUM('PRESTADO', 'DEVUELTO'),
+        defaultValue: 'PRESTADO',
+        allowNull: false
     }
 },{
     tableName: 'prestamos'
