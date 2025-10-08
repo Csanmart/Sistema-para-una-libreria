@@ -3,8 +3,7 @@ require('dotenv').config()
 
 const sequelize = require("./Usuarios/config/db.config")
 // //rutas
-// const ProductRouters = require('./Productos/routers');
-const UsuariosRouters = require('./Usuarios/routers/Usuario.routes');
+
 
 
 //Configuracion de express
