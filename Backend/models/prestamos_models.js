@@ -42,5 +42,6 @@ const prestamos = new sequelize.define('prestamos',{
         allowNull: false
     }
 },{
-    tableName: 'prestamos'
+    tableName: 'prestamos',
+    timestamps: false
 })

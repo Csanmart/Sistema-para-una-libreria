@@ -32,7 +32,8 @@ const libros = new sequelize.define('Libros', {
         allowNull: false,
     }
 },{
-    tableName: 'libros'
+    tableName: 'libros',
+    timestamps: false
 })
 
 

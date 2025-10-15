@@ -1,7 +1,7 @@
 //Configuracion del dotvenv
 require('dotenv').config()
 
-const sequelize = require("./Usuarios/config/db.config")
+const sequelize = require("./config.js/config")
 // //rutas
 
 
@@ -10,7 +10,7 @@ const sequelize = require("./Usuarios/config/db.config")
 const express = require('express');
 
 const app = express();
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 
 app.use(express.json());
 
@@ -19,11 +19,16 @@ const cors = require('cors');
 app.use(cors());
 
 //App routes
-// app.use('/productos', ProductRouters);
-app.use('/usuarios', UsuariosRouters);
+const usuariosRouter = require('./routers/usuarios_routers');
+const categoriasRouter = require('./routers/categorias_routers');
+// app.use(libreria);
+app.use('/libreria',usuariosRouter);
+//app.use(categorias);
+app.use('/libreria',categoriasRouter);
+
 
 //Configuracio del puerto
 app.listen(PORT, ()=>{
     console.log(`http://localhost:${PORT}`);
-});
+}); 
 

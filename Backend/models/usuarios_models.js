@@ -15,15 +15,15 @@ const usuario = sequelize.define('Usuarios', {
     contrasena: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
     },
     rol:{
         type: DataTypes.ENUM('Administrador', 'Operario'), 
-        defaultValue: 'operario',
+        defaultValue: 'Operario',
         allowNull: false
     }
 },{
-    tableName: 'usuarios'
+    tableName: 'usuarios',
+    timestamps: false
 });
 
 module.exports = usuario;
