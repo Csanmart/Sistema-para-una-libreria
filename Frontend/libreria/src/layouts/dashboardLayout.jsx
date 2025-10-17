@@ -14,4 +14,4 @@ export default function DashboarLayout(){
             </main>
         </div>
     )
-}
+};

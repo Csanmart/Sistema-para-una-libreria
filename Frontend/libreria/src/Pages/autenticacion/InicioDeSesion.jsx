@@ -2,8 +2,6 @@ import React, {useState} from "react";
 import autenticacion from "../service/autenticacion";
 import './css/inicioDeSesion.css'
 import { useNavigate } from "react-router-dom";
-import DashboarLayout from "../../layouts/dashboardLayout";
-import dasboardOperario from "../operario/dashboardOperario";
 export default function InicioDeSesion(){
     const [nombre, setNombre] = useState("");
     const [contrasena, setContrasena] = useState("");
