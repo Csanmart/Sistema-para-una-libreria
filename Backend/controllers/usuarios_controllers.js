@@ -49,7 +49,7 @@ exports.inicioSesion = async(req, res)=>{
             message: 'iniciando sesion',
             createToken,usuario:{
                 id_usuario: usuario.id_usuario,
-                rol: usuario.rol === "Administrador"
+                rol: usuario.rol 
             }
         });
 

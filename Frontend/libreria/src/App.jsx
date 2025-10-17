@@ -1,20 +1,22 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navegacion from "./componentes/navegacion";
-import Inicio from "./pages/Inicio";
-import Libros from "./pages/Libros";
-import Categorias from "./pages/Categorias";
-import Usuarios from "./pages/Usuarios";
+import DashboarLayout from "./layouts/dashboardLayout";
+import InicioDeSesion from "./componentes/InicioDeSesion";
+
 
 function App() {
   return (
     <BrowserRouter>
-      <Navegacion />
+    
       <Routes>
-        <Route path="/" element={<Inicio />} />
-        <Route path="/libros" element={<Libros />} />
-        <Route path="/categorias" element={<Categorias />} />
-        <Route path="/usuarios" element={<Usuarios />} />
+        <Route path="/" element={<InicioDeSesion/>}/>
+        
+        {/*Rotas para el administrador*/}
+        <Route element={<DashboarLayout/>}>
+          <Route path="/admin/dashboard" element={<DashboarLayout/>}/>
+        </Route>
+        
+
       </Routes>
     </BrowserRouter>
   );
