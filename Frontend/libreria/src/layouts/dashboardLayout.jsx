@@ -6,9 +6,10 @@ export default function DashboarLayout(){
     return(
         <div className="layout">
             {/*Navegacion fija*/}
-            <aside className="navegacion">
+            <header>
                 <NavegacionAdmin/>
-            </aside>
+            </header>
+
             <main className="content">
                 <Outlet/>
             </main>

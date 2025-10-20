@@ -1,9 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import './css/navegacion.css';
-import CerrarSesion from './CerrarSesion';
+import './css/navegacion.css'
 
 export default function NavegacionOperador(){
+
+    
     return(
         <nav className='nav'>
             <Link to={'/inicio'}>Inicio</Link>

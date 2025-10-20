@@ -34,4 +34,6 @@ const registro = async(nombre, contrasena, rol) =>{
 };
 
 
+
+
 export default {login, registro};

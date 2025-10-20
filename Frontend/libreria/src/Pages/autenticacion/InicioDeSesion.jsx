@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import autenticacion from "../service/autenticacion";
-import './css/inicioDeSesion.css'
+import autenticacion from '../../service/autenticacion'
+import '../../css/InicioDeSesion.css'
 import { useNavigate } from "react-router-dom";
 export default function InicioDeSesion(){
     const [nombre, setNombre] = useState("");
@@ -12,12 +12,12 @@ export default function InicioDeSesion(){
 
         const usuario = await autenticacion.login(nombre, contrasena);
         if(usuario){
-            alert(`Bienvenido a la libreria ${nombre}`)
+            localStorage.setItem("nombre", nombre)
             const rolNormalizado = usuario.rol
             //redirigir
             if(rolNormalizado === "Administrador"){
                 localStorage.setItem("rol", "Administrador");
-                navegacion("/admin/dashboard")
+                navegacion("/admin")
             }else if(rolNormalizado === "Operario"){
                 localStorage.setItem("rol", "Operario");
                 navegacion("")
@@ -31,8 +31,6 @@ export default function InicioDeSesion(){
         else{
             alert("Credenciales incorrectas");
         }
-        console.log(usuario)
-        console.log(navegacion)
     };
 
     return(
