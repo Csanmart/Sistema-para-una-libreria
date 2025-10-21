@@ -18,13 +18,21 @@ app.use(express.json());
 const cors = require('cors');
 app.use(cors());
 
+
+
+
 //App routes
 const usuariosRouter = require('./routers/usuarios_routers');
 const categoriasRouter = require('./routers/categorias_routers');
+const librosRouter = require('./routers/libros_routes');
+
 // app.use(libreria);
 app.use('/libreria',usuariosRouter);
 //app.use(categorias);
 app.use('/libreria',categoriasRouter);
+//app.use(libros)
+app.use('/libreria', librosRouter);
+
 
 
 //Configuracio del puerto

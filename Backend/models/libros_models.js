@@ -1,10 +1,10 @@
 const sequelize = require('../config.js/config');
-const {DataTypes, Model} = require('sequelize');
-const categorias = require('./categorias_models')
+const {DataTypes} = require('sequelize');
 
 
 
-const libros = new sequelize.define('Libros', {
+
+const libros = sequelize.define('Libros', {
     id_libro:{
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -12,12 +12,7 @@ const libros = new sequelize.define('Libros', {
     },
     categoria_id:{
         type: DataTypes.INTEGER,
-        references:{
-            model: categorias,
-            key: 'id_categorias'
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
+        allowNull: false
     },
     titulo:{
         type: DataTypes.STRING,
@@ -37,4 +32,4 @@ const libros = new sequelize.define('Libros', {
 })
 
 
-module.exports = libros;
+module.exports = libros
