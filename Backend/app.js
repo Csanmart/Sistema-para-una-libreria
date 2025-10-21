@@ -1,10 +1,16 @@
+//Configuracion del dotvenv
 require('dotenv').config()
+
+const sequelize = require("./config.js/config")
+// //rutas
+
+
 
 //Configuracion de express
 const express = require('express');
 
 const app = express();
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 
 app.use(express.json());
 
@@ -12,8 +18,25 @@ app.use(express.json());
 const cors = require('cors');
 app.use(cors());
 
+
+
+
+//App routes
+const usuariosRouter = require('./routers/usuarios_routers');
+const categoriasRouter = require('./routers/categorias_routers');
+const librosRouter = require('./routers/libros_routes');
+
+// app.use(libreria);
+app.use('/libreria',usuariosRouter);
+//app.use(categorias);
+app.use('/libreria',categoriasRouter);
+//app.use(libros)
+app.use('/libreria', librosRouter);
+
+
+
 //Configuracio del puerto
 app.listen(PORT, ()=>{
     console.log(`http://localhost:${PORT}`);
-});
+}); 
 

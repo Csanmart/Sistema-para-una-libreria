@@ -1,0 +1,68 @@
+
+/* 📌 Contenedor centrado */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* 📝 Título */
+.titulo {
+  font-size: 28px;
+  color: #333; /* Texto oscuro para contrastar con el fondo blanco */
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* 🧾 Formulario */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 320px;
+  background: rgba(200, 200, 200, 0.2); /* gris suave y transparente */
+  padding: 50px;
+  border-radius: 12px;
+  backdrop-filter: blur(100px); /* efecto glass */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* sombra suave */
+}
+
+/* ⌨️ Inputs estilo Google */
+.formulario input {
+  padding: 12px;
+  font-size: 16px;
+  background: white; /* 👈 fondo blanco */
+  border: 1px solid #ccc; /* borde gris suave */
+  border-radius: 6px;
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.formulario input::placeholder {
+  color: #999; /* texto placeholder gris claro */
+}
+
+/* ✨ Efecto al enfocar */
+.formulario input:focus {
+  border: 1px solid #4285f4; /* azul estilo Google */
+  box-shadow: 0 0 4px rgba(66, 133, 244, 0.5);
+}
+
+/* 🖱️ Botón */
+.boton {
+  padding: 12px;
+  font-size: 16px;
+  background: #4285f4; /* Azul Google */
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.boton:hover {
+  background: #3367d6;
+}
