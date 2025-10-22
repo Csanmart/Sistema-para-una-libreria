@@ -1,6 +1,7 @@
 const libros = require('../models/libros_models');
 const categorias = require('../models/categorias_models');
-const { elimanarUsuario } = require('./usuarios_controllers');
+const { mostrarPorId } = require('./categorias_controllers');
+
 
 exports.CrearLibro = async(req, res) =>{
     try{
@@ -27,14 +28,9 @@ exports.CrearLibro = async(req, res) =>{
 
 exports.MostrarTodosLibros = async(req, res)=>{
     try{
-        const MostrarLibros = await libros.findAll({
-            include: {
-                model: categorias,
-                attributes: ['id_categorias', 'nombre']
-            }
-        });
+        const MostrarLibros = await libros.findAll();
 
-        if(!MostrarLibros) return res.status(400).json({message: 'No se encuentran libros actuamente'});
+        if(MostrarLibros.length === 0) {return res.status(400).json({message: 'No se encuentran libros actuamente'})};
 
         res.status(200).json({message: 'Mostrando todos los libros', date: MostrarLibros});
     }catch(error){
@@ -46,15 +42,14 @@ exports.MostrarPorId = async(req, res)=>{
     try {
         const {id_libro} = req.params
 
-        const MostrarPorId = await libros.findByPk(id_libro, {
-            include:{
-                model: categorias,
-                attributes: ['id_categorias', 'nombre']
-            }
-        })
+        if(!id_libro)return res.status(400).json({message: 'No se encuentra este id', date: id_libro});
 
-        if(!MostrarPorId) return res.status(400).json({message: 'Error no encuentro este id', date: id_libro});
-
+        const MostrarPorId = await libros.findByPk(id_libro)
+        
+        if(MostrarPorId.length === 0) return res.status(400).json({message:    'No hay datos para mostrar', date: id_libro});
+        
+        
+        
         res.status(200).json({message: 'Libro por id', date: MostrarPorId});
     } catch (error) {
         res.status(400).json({message: 'Error buscando el libro', date: error})
@@ -66,6 +61,8 @@ exports.ActualizarLibro = async(req, res)=>{
         const {id_libro} =  req.params;
         const {categoria_id, titulo, autor, cantidad} = req.body;
 
+        if(categoria_id)return res.status(400).json({message: 'Este id no se encuentra'})
+
         const actualizaLibro = await libros.findByPk(id_libro);
 
         if(!actualizaLibro) return res.status(400).json({message: 'No se encuentra el id'});
@@ -75,7 +72,7 @@ exports.ActualizarLibro = async(req, res)=>{
         if(categoria_id) actualizaLibro.categoria_id = categoria_id;
         if(titulo) actualizaLibro.titulo = titulo;
         if(autor) actualizaLibro.autor = autor;
-        if(cantida) actualizaLibro.cantidad = cantidad;
+        if(cantidad) actualizaLibro.cantidad = cantidad;
         
         actualizaLibro.save()
 
