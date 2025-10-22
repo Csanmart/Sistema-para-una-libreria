@@ -1,5 +1,5 @@
 const categoriaModel = require('../models/categorias_models');
-
+const {RelationCategoria, RelationLibro }  = require('../models/relationChips/relations');
 //Creaciacion de categorias para cada libro
 
 exports.crearCategoria = async(req, res)=>{
@@ -79,3 +79,24 @@ exports.eliminarCategoria = async(req, res)=>{
         res.status(400).json({message: 'Error eliminando la categoria'})
     }
 };
+
+
+exports.MostrarlibrosPorCategoria = async(req, res)=>{
+    try{
+        const {id_categoria} = req.params;
+        
+        const categoria = await RelationCategoria.findByPk(id_categoria, {
+            include: {
+                model: RelationLibro,
+                attributes: ['id_libro', 'titulo', 'autor', 'cantidad']
+            }
+        })
+
+        if(!categoria) res.status(400).json({message: 'Error no se encuentra la categoria'});
+
+        res.status(200).json({message: `libros de la categoria : ${categoria.nombre}`, date: categoria});
+
+    }catch(error){
+        res.status(400).json({message: 'Error comprobando libros'});
+    }
+}

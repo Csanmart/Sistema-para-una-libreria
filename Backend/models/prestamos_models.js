@@ -4,7 +4,7 @@ const usuario = require('./usuarios_models');
 const libros =  require('./libros_models');
 
 
-const prestamos = new sequelize.define('prestamos',{
+const prestamos = sequelize.define('prestamos',{
     id_prestamo: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -12,6 +12,7 @@ const prestamos = new sequelize.define('prestamos',{
     },
     usuario_id:{
         type:DataTypes.INTEGER,
+        allowNull: false,
         references:{
             model: usuario,
             key:'id_usuario'
@@ -21,6 +22,7 @@ const prestamos = new sequelize.define('prestamos',{
     },
     libro_id:{
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: libros,
             key: 'id_libro'
@@ -34,7 +36,14 @@ const prestamos = new sequelize.define('prestamos',{
     },
     fecha_devolucion:{
         type:DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            isAfterFechaPrestamo(value){
+                if(this.fecha_prestamo && value < this.fecha_prestamo){
+                    throw new Error('Error la fecha de devolucion no puede ser  la anterior de la fecha de prestamo')
+                }
+            }
+        }
     },
     estado: {
         type: DataTypes.ENUM('PRESTADO', 'DEVUELTO'),

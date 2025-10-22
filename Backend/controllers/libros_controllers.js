@@ -61,8 +61,6 @@ exports.ActualizarLibro = async(req, res)=>{
         const {id_libro} =  req.params;
         const {categoria_id, titulo, autor, cantidad} = req.body;
 
-        if(categoria_id)return res.status(400).json({message: 'Este id no se encuentra'})
-
         const actualizaLibro = await libros.findByPk(id_libro);
 
         if(!actualizaLibro) return res.status(400).json({message: 'No se encuentra el id'});
