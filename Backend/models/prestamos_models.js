@@ -54,3 +54,6 @@ const prestamos = sequelize.define('prestamos',{
     tableName: 'prestamos',
     timestamps: false
 })
+
+
+module.exports = prestamos
