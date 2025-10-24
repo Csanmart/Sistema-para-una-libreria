@@ -1,6 +1,6 @@
 const libros = require('../models/libros_models');
 const categorias = require('../models/categorias_models');
-const { mostrarPorId } = require('./categorias_controllers');
+
 
 
 exports.CrearLibro = async(req, res) =>{
