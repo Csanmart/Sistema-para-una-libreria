@@ -22,7 +22,7 @@ El sistema está construido con Node.js, Express, Sequelize y MySQL, lo que perm
 
 Clona el repositorio
 
-git clone https://github.com/tuusuario/system-library.git cd system-library
+git clone https://github.com/Csanmart/Sistema-para-una-libreria
 
 Instala las dependencias
 
