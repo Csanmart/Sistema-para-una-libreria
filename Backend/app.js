@@ -25,14 +25,16 @@ app.use(cors());
 const usuariosRouter = require('./routers/usuarios_routers');
 const categoriasRouter = require('./routers/categorias_routers');
 const librosRouter = require('./routers/libros_routes');
+const prestamosRouter  = require('./routers/prestamos_routers')
 
-// app.use(libreria);
+// app.use(usuarios);
 app.use('/libreria',usuariosRouter);
 //app.use(categorias);
 app.use('/libreria',categoriasRouter);
 //app.use(libros)
 app.use('/libreria', librosRouter);
-
+//app.use(prestamos)
+app.use('/libreria', prestamosRouter);
 
 
 //Configuracio del puerto

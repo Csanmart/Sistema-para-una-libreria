@@ -1,7 +1,6 @@
 const sequelize = require('../config.js/config');
 const {DataTypes} = require('sequelize');
-const usuario = require('./usuarios_models');
-const libros =  require('./libros_models');
+
 
 
 const prestamos = sequelize.define('prestamos',{
@@ -14,7 +13,7 @@ const prestamos = sequelize.define('prestamos',{
         type:DataTypes.INTEGER,
         allowNull: false,
         references:{
-            model: usuario,
+            model: 'usuarios',
             key:'id_usuario'
         },
         onDelete: 'CASCADE',
@@ -24,7 +23,7 @@ const prestamos = sequelize.define('prestamos',{
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: libros,
+            model: 'libros',
             key: 'id_libro'
         },
         onDelete: 'CASCADE',

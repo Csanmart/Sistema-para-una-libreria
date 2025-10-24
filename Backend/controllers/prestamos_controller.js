@@ -35,22 +35,22 @@ exports.CrearPrestamo = async (req, res) => {
 
     await libro.update({ cantidad: libro.cantidad - 1 });
 
-    const prestamosConLosDatos = await RelationPrestamo.create(prestamo.id, {
-      include: [
-        {
-          model: RelationUsuario,
-          attributes: ["id_usuario", "nombre"],
-        },
-        {
-          model: RelationLibro,
-          attributes: ["id_libro", "titulo", "cantidad"],
-        },
-      ],
-    });
+    const prestamoConDatos = await RelationPrestamo.findByPk(prestamo.id_prestamo, {
+  include: [
+    {
+      model: RelationUsuario, // 👈 ya debería funcionar
+      attributes: ['id_usuario', 'nombre']
+    },
+    {
+      model: RelationLibro,
+      attributes: ['id_libro', 'titulo', 'cantidad']
+    }
+  ]
+});
 
     res
       .status(201)
-      .json({ message: "Prestado correctamente", Date: prestamosConLosDatos });
+      .json({ message: "Prestado correctamente", Date: prestamoConDatos });
   } catch (error) {
     res.status(400).json({ message: "Error creando el prestamo" });
   }
