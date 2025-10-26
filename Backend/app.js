@@ -13,10 +13,16 @@ const app = express();
 const PORT = process.env.PORT || 3000
 
 app.use(express.json());
+app.use(express.urlencoded())
 
 //configuracion del cors
+
 const cors = require('cors');
-app.use(cors());
+const corsOptiones = {
+    origin: ['http://localhost:5173'],
+    methods: ['GET', 'POST']
+};
+app.use(cors(corsOptiones));
 
 
 

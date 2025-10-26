@@ -1,6 +1,6 @@
 import React from "react";
 import '../../css/Dashboard.css'
-import MostrarNombre from "../../componentes/adminComponents/MostrarNombre";
+import MostrarNombre from "../../componentes/MostrarNombre";
 
 export default function Dashboard(){
     return( 
