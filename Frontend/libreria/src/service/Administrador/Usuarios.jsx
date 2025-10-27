@@ -1,39 +1,28 @@
-class Usuario{
-    constructor(baseUrl){
-        this.baseUrl = baseUrl;
+import { BaseService } from "./BaseSevice";
+
+class UsuarioService extends BaseService{
+    
+    //Mostrar todos los usuarios
+    async mostrarTodos(){
+        return this.get('/usuarios/todos-los-usuarios');
     }
 
-    async mostrarTodosLosUsuarios(){
-        const response = await fetch(`${this.baseUrl}/usuarios/todos-los-usuarios`);
-        if(!response.ok)throw new Error('Error mostrando los datos');
-        return await response.json();
-        
-    };
+    //Crear los usuarios
 
-    async mostrarUsuarioPorId(id_usuario){
-        if(!id_usuario)throw new Error('Error no se encuentra el Id')
-        
-            const response = await fetch(`${this.baseUrl}/usuarios/especifico/${id_usuario}`);
-        if(!response.ok)throw new Error('Error mostrando el usuario por ID');
-        return await response.json();
-    };
+    async crearUsuarios(data){
+        return this.post('/usuarios/registro', data);
+    }
 
+    //actualizar usuario
+    async actualizarUsuario(id_usuario, data){
+        return this.put(`/usuarios/actualizar/${id_usuario}`, data);
+    }
 
-    async actualizarUsuario(id_usuario){
-        if(!id_usuario)throw new Error('Error no se encuentra el id');
-
-        const response = await fetch(`${this.baseUrl}/actualizar/${id_usuario}`);
-        if(!response.ok)throw new Error('Error no se puede actualizar el usuario');
-        return await response.json();
-    };
-
+    //Eliminar usuarios
     async eliminarUsuario(id_usuario){
-        if(!id_usuario)throw new Error('Error no se encuentra el usuario');
-        const response = await fetch(`${this.baseUrl}/usuarios/eliminar/${id_usuario}`);
-        if(!response.ok)throw new Error('Error eliminando el usuario');
-        return response.json();
+        return this.delete(`/usuarios/eliminar/${id_usuario}`)
     }
 }
 
+export const  UsuarioService = new UsuarioService('http://localhost:3100/libreria');
 
-export const Usuario = new Usuario('http://localhost:3100');

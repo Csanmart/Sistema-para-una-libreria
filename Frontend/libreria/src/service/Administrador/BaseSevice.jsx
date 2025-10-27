@@ -1,22 +1,75 @@
 export class BaseService{
     constructor(baseUrl){
         this.baseUrl = baseUrl
+        this.token = null
+    }
+
+
+    //setToken
+    setToken(token){
+        this.token = token
+    }
+
+    async beforeRequest(options = {}){
+        const headers = {
+            'Content-Type': 'application/json',
+            ...options.headers,
+        };
+
+        if(this.token){
+            headers['Authorization'] = `Bearer ${this.token}`; 
+        }
+
+        return {
+            ...options,
+            headers
+        }
+    }
+
+
+    async request(endpoint, options = {}){
+        const requestOptions = await this.beforeRequest(options);
+        const response = await fetch(`${this.baseUrl}${endpoint}`, requestOptions);
+        const finalResponse = await this.afterResponse(response);
+        return await finalResponse.json();
+    }
+
+    async afterResponse(response){
+        if(!response.ok){
+            if(response.status === 400){
+                throw new Error('No autorizado. Token invalido o expirado');
+            }else if(response.status === 300){
+                throw new Error('Error interno del servidor')
+            }else{
+                const msg = await response.text();;
+                throw new Error(msg || `Error http ${response.status}`)
+            }
+        }
+        return response
     }
 
     async get(endpoint){
-        const response = await fetch(`${this.baseUrl}${endpoint}`);
-        if(!response) throw new Error(`Error realizando el GET en ${endpoint}`);
-        return await response.json();
+        return this.request(endpoint, {method: 'GET'});
     }
 
     async post(endpoint, data){
-        const response = await fetch(`${this.baseUrl}${endpoint}`, {
+        return this.request(endpoint,{
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
-        });
-        if(!response.ok)throw new Error(`Error realizando el POST en ${endpoint}`);
-        return await response.json()
+        })
     }
 
+    async put(endpoint, data) {
+        return this.request(endpoint, {
+            method: 'PUT',
+            body: JSON.stringify(data),
+        });
+    }
+
+    async delete(endpoint) {
+        return this.request(endpoint, {
+            method: 'DELETE',
+        });
+    }
 }
+
