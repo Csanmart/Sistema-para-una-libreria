@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import CerrarSesion from "../CerrarSesion";
-import '../css/navegacion.css'
+import '../../css/navegacion.css'
 export default function NavagacionAdmin(){
     return(
         <nav className="nav">

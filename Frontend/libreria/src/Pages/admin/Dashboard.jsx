@@ -6,6 +6,7 @@ export default function Dashboard(){
     return( 
         <div className="content-dashboard">
             <MostrarNombre/>
+            
         </div>
     )
 }

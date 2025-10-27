@@ -7,7 +7,6 @@ const RelationUsuario = require('../usuarios_models');
 RelationCategoria.hasMany(RelationLibro,{
     foreignKey: 'categoria_id'
 });
-
 RelationLibro.belongsTo(RelationCategoria, {
     foreignKey: 'categoria_id',
     

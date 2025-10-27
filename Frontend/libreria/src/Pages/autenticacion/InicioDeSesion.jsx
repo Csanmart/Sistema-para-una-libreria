@@ -1,56 +1,109 @@
-import React, {useState} from "react";
-import autenticacion from '../../service/autenticacion'
-import '../../css/InicioDeSesion.css'
+import React, { useState } from "react";
+import autenticacion from "../../service/autenticacion";
+import "../../css/InicioDeSesion.css";
 import { useNavigate } from "react-router-dom";
-export default function InicioDeSesion(){
-    const [nombre, setNombre] = useState("");
-    const [contrasena, setContrasena] = useState("");
-    const navegacion = useNavigate()
+import Swal from 'sweetalert2'
+import 'sweetalert2/themes/bootstrap-4.css'
 
-    const handleSubmit = async (e)=>{
-        e.preventDefault();
+export default function InicioDeSesion() {
+  const [nombre, setNombre] = useState("");
+  const [contrasena, setContrasena] = useState("");
+  const navegacion = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-        const usuario = await autenticacion.login(nombre, contrasena);
-        if(usuario){
-            localStorage.setItem("nombre", nombre)
-            const rolNormalizado = usuario.rol
-            //redirigir
-            if(rolNormalizado === "Administrador"){
-                localStorage.setItem("rol", "Administrador");
-                navegacion("/admin")
-            }else if(rolNormalizado === "Operario"){
-                localStorage.setItem("rol", "Operario");
-                navegacion("")
-            }else{
-                alert(`Rol de usuario no reconocido: ${usuario.rol}`)
-            }
-        }else if(!nombre || !contrasena){
-            alert("Los campos estan vacios")
-            return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!nombre || !contrasena) {
+      Swal.fire({
+        icon: "warning",
+        title: "Campos vacíos",
+        text: "Recuerda no dejar los campos vacíos.",
+      });
+      return; // detener ejecución
+    }
+
+    try {
+      setLoading(true);
+
+      const usuario = await autenticacion.login(nombre, contrasena);
+
+      if (usuario) {
+        localStorage.setItem("nombre", nombre);
+        const rolNormalizado = usuario.rol;
+
+        if (rolNormalizado === "Administrador") {
+          localStorage.setItem("rol", "Administrador");
+          setTimeout(()=>{navegacion("/admin"), 2000});
+          Swal.fire({
+          icon: "success",
+          title: "Inicio de sesión exitoso",
+          text: `Bienvenido ${nombre}`,
+          timer: 1500,
+          showConfirmButton: false,
+        });
+        } else if (rolNormalizado === "Operario") {
+          localStorage.setItem("rol", "Operario");
+          navegacion("/operario");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Rol no reconocido",
+            text: `Rol desconocido: ${usuario.rol}`,
+          });
         }
-        else{
-            alert("Credenciales incorrectas");
-        }
-    };
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Credenciales incorrectas",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error en el servidor",
+        text: error.message || "No se puede realizar la operación.",
+      });
+    } finally {
+      setTimeout(()=>{
+        setLoading(false);
+      }, 3000);
+    }
+  };
 
-    return(
-        <div className="container">
-            <form onSubmit={handleSubmit} className="formulario">
-            <h2 className="titulo">Inicio de sesion</h2>
-                <input type="nombre"
-                    placeholder="Nombre"
-                    value={nombre}
-                    onChange={(e)=>setNombre(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Contrasena"
-                    value={contrasena}
-                    onChange={(e)=>setContrasena(e.target.value)}
-                />
-                <button type="submit" className="boton">Iniciar sesion</button>
-            </form>
+  return (
+    <div className="container">
+      {/* Si loading está activo, muestra el overlay */}
+      {loading && (
+        <div className="overlay">
+          <div className="spinner"></div>
+          <p>Iniciando sesión...</p>
         </div>
-    )
+      )}
+
+      <form onSubmit={handleSubmit} className={`formulario ${loading ? "deshabilitado" : ""}`}>
+        <img src= "./public/image.png"alt="Icono de la libreria" className="logo"/>
+        <h2 className="titulo">Inicio de sesión</h2>
+        <input
+          type="text"
+          placeholder="Nombre"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          disabled={loading}
+        />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={contrasena}
+          onChange={(e) => setContrasena(e.target.value)}
+          disabled={loading}
+        />
+        <button type="submit" className="boton" disabled={loading}>
+          {loading ? "Cargando..." : "Iniciar sesión"}
+        </button>
+      </form>
+    </div>
+  );
 }
 

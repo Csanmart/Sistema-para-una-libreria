@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const usuariosControllers = require('../controllers/usuarios_controllers');
+const verificarRol = require('../middleware/autenticacion/verficarRol'); 
+const verificarToken = require('../middleware/autenticacion/verficarToken');
 
 //Crear usuarios
 router.post('/usuarios/registro', verificarToken, verificarRol(['Administrador']),usuariosControllers.createUsuario);

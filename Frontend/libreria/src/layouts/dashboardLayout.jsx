@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import NavegacionAdmin from "../componentes/NavegacionAdmin";
-
+import NavegacionAdmin from '../componentes/adminComponents/NavegacionAdmin'
+import "../css/navegacion.css"
 export default function DashboarLayout(){
     return(
         <div className="layout">

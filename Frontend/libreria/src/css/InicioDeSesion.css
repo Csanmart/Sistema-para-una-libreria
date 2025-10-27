@@ -1,68 +1,123 @@
-
-/* 📌 Contenedor centrado */
-.container {
+/* 🔹 Fondo semitransparente */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  z-index: 999;
+  color: white;
+  font-size: 1.2rem;
+  backdrop-filter: blur(2px);
 }
 
-/* 📝 Título */
-.titulo {
-  font-size: 28px;
-  color: #333; /* Texto oscuro para contrastar con el fondo blanco */
-  margin-bottom: 30px;
-  text-align: center;
+/* 🔹 Animación giratoria */
+.spinner {
+  border: 6px solid rgba(255, 255, 255, 0.3);
+  border-top: 6px solid #8b5cf6; /* Morado */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
 }
 
-/* 🧾 Formulario */
-.formulario {
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 🔹 Efecto visual en el formulario */
+.formulario.deshabilitado {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+
+/* Centrar todo el contenido en la pantalla */
+.container {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 320px;
-  background: rgba(200, 200, 200, 0.2); /* gris suave y transparente */
-  padding: 50px;
-  border-radius: 12px;
-  backdrop-filter: blur(100px); /* efecto glass */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* sombra suave */
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* ocupa toda la pantalla */
+  background: linear-gradient(135deg, #6a0dad, #1a1a1a); /* morado con negro */
+  font-family: 'Poppins', sans-serif;
+  position: relative;
 }
 
-/* ⌨️ Inputs estilo Google */
-.formulario input {
-  padding: 12px;
-  font-size: 16px;
-  background: white; /* 👈 fondo blanco */
-  border: 1px solid #ccc; /* borde gris suave */
-  border-radius: 6px;
-  color: #333;
-  outline: none;
+/* Formulario */
+.formulario {
+  background-color: white;
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
   transition: all 0.3s ease;
 }
 
-.formulario input::placeholder {
-  color: #999; /* texto placeholder gris claro */
+/* Deshabilitado durante carga */
+.formulario.deshabilitado {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-/* ✨ Efecto al enfocar */
-.formulario input:focus {
-  border: 1px solid #4285f4; /* azul estilo Google */
-  box-shadow: 0 0 4px rgba(66, 133, 244, 0.5);
+/* Título */
+.titulo {
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #6a0dad;
 }
 
-/* 🖱️ Botón */
-.boton {
-  padding: 12px;
+/* Inputs */
+.formulario input {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
   font-size: 16px;
-  background: #4285f4; /* Azul Google */
-  border: none;
+  transition: all 0.2s ease;
+}
+
+.formulario input:focus {
+  border-color: #6a0dad;
+  box-shadow: 0 0 5px rgba(106, 13, 173, 0.3);
+  outline: none;
+}
+
+/* Botón */
+.boton {
+  background-color: #6a0dad;
   color: white;
-  border-radius: 6px;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 16px;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .boton:hover {
-  background: #3367d6;
+  background-color: #550a9e;
+  transform: scale(1.05);
+}
+
+.logo{
+  width: 120px;
+  height: auto;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
