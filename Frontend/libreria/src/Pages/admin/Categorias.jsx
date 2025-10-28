@@ -1,5 +1,10 @@
+import '../../css/Dashboard.css'
+
+
 export default function Categorias(){
     return(
-        <h1>Crea tus categorias</h1>
+        <div className="content-dashboard">
+            <h2>Categorias</h2>
+        </div>
     )
 };

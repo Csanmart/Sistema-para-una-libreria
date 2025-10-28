@@ -30,6 +30,7 @@ export default function InicioDeSesion() {
 
       if (usuario) {
         localStorage.setItem("nombre", nombre);
+        localStorage.setItem("token", usuario.token)
         const rolNormalizado = usuario.rol;
 
         if (rolNormalizado === "Administrador") {

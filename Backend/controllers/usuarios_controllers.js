@@ -41,13 +41,13 @@ exports.inicioSesion = async(req, res)=>{
             return res.status(400).json({message: 'No coindicen las contrasenas'})
         }
         
-        const createToken = jwt.sign(
+        const token = jwt.sign(
             {id_usuario: usuario.id_usuario, rol: usuario.rol}, process.env.JTW_CLAVE,{expiresIn: '2h'}
         )
 
         res.status(200).json({
             message: 'iniciando sesion',
-            createToken,usuario:{
+            token,usuario:{
                 id_usuario: usuario.id_usuario,
                 rol: usuario.rol 
             }

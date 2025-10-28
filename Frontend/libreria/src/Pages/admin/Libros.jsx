@@ -1,6 +1,9 @@
 export default function Libros(){
     return(
-        <h1>Coloca aqui tus libros</h1>
+        <div className="content-dashboard">
+            <h2>Libros</h2>
+            
+        </div>
     )
 };
 

@@ -7,49 +7,49 @@ export class BaseService{
 
     //setToken
     setToken(token){
-        this.token = token
+        this.token = token;
     }
 
-    async beforeRequest(options = {}){
+    async beforeRequest(options = {}) {
         const headers = {
             'Content-Type': 'application/json',
             ...options.headers,
         };
 
-        if(this.token){
-            headers['Authorization'] = `Bearer ${this.token}`; 
+        if (this.token) {
+            headers['Authorization'] = `Bearer ${this.token}`;
         }
 
         return {
             ...options,
-            headers
-        }
+            headers,
+        };
     }
 
-
-    async request(endpoint, options = {}){
+    async request(endpoint, options = {}) {
         const requestOptions = await this.beforeRequest(options);
         const response = await fetch(`${this.baseUrl}${endpoint}`, requestOptions);
         const finalResponse = await this.afterResponse(response);
         return await finalResponse.json();
     }
 
-    async afterResponse(response){
-        if(!response.ok){
-            if(response.status === 400){
-                throw new Error('No autorizado. Token invalido o expirado');
-            }else if(response.status === 300){
-                throw new Error('Error interno del servidor')
-            }else{
-                const msg = await response.text();;
-                throw new Error(msg || `Error http ${response.status}`)
+    async afterResponse(response) {
+        if (!response.ok) {
+            if (response.status === 400) {
+                throw new Error('No autorizado. Token inválido o expirado');
+            } else if (response.status === 500) {
+                throw new Error('Error interno del servidor');
+            } else {
+                const msg = await response.text();
+                throw new Error(msg || `Error HTTP ${response.status}`);
             }
         }
-        return response
+        return response;
     }
+    
 
     async get(endpoint){
-        return this.request(endpoint, {method: 'GET'});
+        return this.request(endpoint);
     }
 
     async post(endpoint, data){

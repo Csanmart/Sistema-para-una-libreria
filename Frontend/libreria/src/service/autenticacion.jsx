@@ -1,5 +1,5 @@
 const API_URL = 'http://localhost:3100/libreria/usuarios/';
-
+import { usuarioService } from "./Administrador/Usuarios";
 
 const login = async(nombre, contrasena) =>{
     try{
@@ -9,10 +9,18 @@ const login = async(nombre, contrasena) =>{
             body: JSON.stringify({nombre, contrasena})
         });
         if(!response) return false;
+
         const data = await response.json();
-        localStorage.setItem("token", data.createToken);
+        localStorage.setItem("token", data.token);
         localStorage.setItem("usuario", JSON.stringify(data.usuario));
-        return data.usuario;
+
+
+        usuarioService.setToken(data.token)
+        return {
+            token: data.token,
+            usuario: data.usuario,
+            rol: data.usuario.rol
+        }
     }catch(error){
         console.error('Error en login', error);
         return false;

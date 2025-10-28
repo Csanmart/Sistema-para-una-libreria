@@ -4,7 +4,7 @@ class UsuarioService extends BaseService{
     
     //Mostrar todos los usuarios
     async mostrarTodos(){
-        return this.get('/usuarios/todos-los-usuarios');
+        return this.get('/usuarios/usuarios');
     }
 
     //Crear los usuarios
@@ -24,5 +24,5 @@ class UsuarioService extends BaseService{
     }
 }
 
-export const  UsuarioService = new UsuarioService('http://localhost:3100/libreria');
+export const  usuarioService = new UsuarioService('http://localhost:3100/libreria');
 

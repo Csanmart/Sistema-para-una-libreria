@@ -11,7 +11,7 @@ router.post('/usuarios/inicio', usuariosControllers.inicioSesion);
 
 
 //Mostrar usuarios
-router.get('/usuarios/todos-los-usuarios', verificarToken, verificarRol(['Administrador']),usuariosControllers.verUsuarios);
+router.get('/usuarios/usuarios', verificarToken, verificarRol(['Administrador']),usuariosControllers.verUsuarios);
 
 //Mostrar usuarios por id
 router.get('/usuarios/especifico/:id_usuario', verificarToken, verificarRol(['Administrador']),usuariosControllers.usuarioPorId);
