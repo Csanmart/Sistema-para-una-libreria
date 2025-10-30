@@ -1,58 +1,157 @@
+/* 🔹 Navegación mejorada */
 .nav {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 230px;
-  height: 100vh;
-  background-color: #4B0082; /* morado oscuro */
-  display: flex;
-  flex-direction: column;
-  padding: 20px 10px;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background: linear-gradient(180deg, #2c3e50 0%, #1a2530 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
-/* 📌 Lista sin estilos por defecto */
+/* 🔹 Efecto colapsado/expandido mejorado */
+.nav.collapsed {
+    width: 70px;
+}
+
+/* 🔹 Logo y encabezado */
+.nav-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+}
+
+.nav-logo {
+    width: 36px;
+    height: 36px;
+    background-color: #9370DB;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.nav-title {
+    font-size: 18px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+}
+
+.nav.collapsed .nav-title {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 🔹 Menú de navegación */
+.nav-menu {
+    flex: 1;
+    padding: 10px 0;
+}
+
 .nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/* 📎 Enlaces */
-.nav a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  padding: 12px 16px;
-  margin: 4px 0;
-  border-radius: 8px;
-  transition: background 0.3s;
+.nav li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    transition: all 0.3s;
+    position: relative;
+    margin: 4px 8px;
+    border-radius: 8px;
 }
 
-/* 🟣 Efecto hover */
-.nav a:hover {
-  background-color: #9370DB; /* morado suave */
+.nav li:hover {
+    background-color: rgba(147, 112, 219, 0.2);
+    cursor: pointer;
 }
 
-/* ✅ Cuando el link está activo */
-.nav a.active {
-  background-color: #6a0dad; /* morado más fuerte */
+.nav li.active {
+    background-color: rgba(147, 112, 219, 0.3);
+    border-left: 3px solid #9370DB;
 }
 
-/* 🟡 Botón cerrar sesión */
-.nav button {
-  margin-top: 1;
-  padding: 10px 16px;
-  border: none;
-  background-color: #9370DB;
-  color: white;
-  font-size: 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
 }
 
-.nav button:hover {
-  background-color: #6a0dad;
+/* 🔹 Texto de enlaces */
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.nav.collapsed .nav-link span {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-link.active {
+    color: #9370DB;
+}
+
+/* 🔹 Pie del menú con botón de cerrar sesión */
+.nav-footer {
+    padding: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 🔹 Botón para alternar el menú */
+.toggle-nav {
+    position: fixed;
+    top: 20px;
+    left: 260px;
+    z-index: 1001;
+    background: #9370DB;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-nav:hover {
+    background: #7a5bc0;
+    transform: scale(1.1);
+}
+
+.nav.collapsed ~ .toggle-nav {
+    left: 80px;
 }

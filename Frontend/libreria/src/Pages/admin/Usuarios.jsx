@@ -1,73 +1,32 @@
-import React, {useEffect, useState} from "react"
-import {usuarioService} from '../../service/Administrador/Usuarios';
-import BotonesOpciones from "../../componentes/adminComponents/BotonesOpciones";
+import TablaDeUsuarios from "../../componentes/adminComponents/TablaDeUsuarios";
+import RegistroUsuarios from "../../componentes/adminComponents/RegistroUsuarios";
+
+import '../../css/usuarios.css'
+
 
 export default function Usuarios(){
-    
-    const [usuarios, setUsuarios] = useState([]);
-    const [error, setError] = useState(null);
-
-
-    console.log(usuarioService)
-    useEffect(()=>{
-        const getAllUsers = async ()=> {
-            try{
-                const data = await usuarioService.mostrarTodos();
-                setUsuarios(data.data);
-                console.log(data)
-            }
-            catch(error){
-                setError('Error cargando los usuarios...')
-                console.log(error)
-            }
-        }
-        getAllUsers()
-    }, []);
-
-    
     return (
       <div className="content-dashboard">
         <header className="header">
           <h2>Usuarios</h2>
         </header>
 
-        <section className="table_users">
+        <section className="table-section">
           <h3>Lista de usuarios</h3>
-
-          {error && <p style={{ color: "red" }}>{error}</p>}
-          <table>
-            <thead>
-              <th>ID</th>
-              <th>NOMBRE</th>
-              <th>CARGO</th>
-              <th>OPCIONES</th>
-            </thead>
-            <tbody>
-              {usuarios.length > 0 ? (
-                usuarios.map((u) => (
-                  <tr key={u.id_usuario}>
-                    <td>{u.id_usuario}</td>
-                    <td>{u.nombre}</td>
-                    <td>{u.rol}</td>
-                    <td>
-                      <BotonesOpciones id_usuario={u.id_usuario} />
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="4">Cargando usuarios...</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+          <div className="card">
+            <TablaDeUsuarios/>
+          </div>
         </section>
-        <section className="add_users">
-          
+        <section className="form-section">
+          <h3>Crear usuarios</h3>
+          <div className="card from-card">
+            <RegistroUsuarios/>
+          </div>
         </section>
+        <footer className="end-page">
+          <p>Derechos reservados a csanmart ®️</p>
+        </footer>
       </div>
     );
-
-    console.log(usuarioService)
 };
 

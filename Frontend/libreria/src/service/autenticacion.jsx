@@ -27,21 +27,8 @@ const login = async(nombre, contrasena) =>{
     }
 }
 
-const registro = async(nombre, contrasena, rol) =>{
-    try{
-        const response = await fetch(API_URL, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({nombre,  contrasena, rol})
-        })
-        return response.ok
-    }catch(error){
-        console.error('Error en el registro', error)
-        return false;
-    }
-};
 
 
 
 
-export default {login, registro};
+export default {login};
