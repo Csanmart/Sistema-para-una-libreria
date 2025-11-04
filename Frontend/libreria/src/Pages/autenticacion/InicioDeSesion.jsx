@@ -8,6 +8,7 @@ import 'sweetalert2/themes/bootstrap-4.css'
 export default function InicioDeSesion() {
   const [nombre, setNombre] = useState("");
   const [contrasena, setContrasena] = useState("");
+  
   const navegacion = useNavigate();
   const [loading, setLoading] = useState(false);
 

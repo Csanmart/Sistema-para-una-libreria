@@ -125,6 +125,7 @@ exports.elimanarUsuario = async(req, res)=>{
     try {
         const {id_usuario} = req.params;
         const usuario = await usuarioModelos.findByPk(id_usuario);
+        usuario.destroy()
         res.status(200).json({message: 'Usuario elemiando', data: usuario});
     } catch (error) {
         res.status(400).json({message: 'Error elimando el usuario'});

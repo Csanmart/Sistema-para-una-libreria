@@ -55,7 +55,7 @@ export default function TablaDeUsuarios() {
                 <td>{u.nombre}</td>
                 <td>{u.rol}</td>
                 <td>
-                    <BotonesOpciones id_usuario={u.id_usuario} />
+                    <BotonesOpciones id_usuario={u.id_usuario} onDelete={(id) => setUsuarios(usuarios.filter((user) => user.id_usuario !== id))}/>
                 </td>
               </tr>
             ))

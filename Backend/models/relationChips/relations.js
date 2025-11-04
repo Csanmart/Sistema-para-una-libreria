@@ -17,7 +17,7 @@ RelationLibro.hasMany(RelationPrestamo,{foreignKey: 'libro_id'});
 RelationPrestamo.belongsTo(RelationLibro, {foreignKey: 'libro_id'})
 
 //Relacion entre el prestamo y el usuario que hizo el prestamos
-RelationUsuario.hasMany(RelationPrestamo, {foreignKey: 'usuario_id'})
+RelationUsuario.hasMany(RelationPrestamo, {foreignKey: 'usuario_id', onDelete: 'CASCADE'})
 RelationPrestamo.belongsTo(RelationUsuario, {foreignKey: 'usuario_id'});
 
 module.exports = {RelationCategoria, RelationLibro, RelationUsuario, RelationPrestamo};

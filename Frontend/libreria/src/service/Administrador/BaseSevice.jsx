@@ -69,6 +69,7 @@ export class BaseService{
     async delete(endpoint) {
         return this.request(endpoint, {
             method: 'DELETE',
+            headers: {'Content-Type': 'application/json'}
         });
     }
 }
