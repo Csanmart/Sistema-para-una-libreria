@@ -1,5 +1,5 @@
-import TablaDeUsuarios from "../../componentes/adminComponents/TablaDeUsuarios";
-import RegistroUsuarios from "../../componentes/adminComponents/RegistroUsuarios";
+import TablaDeUsuarios from '../../componentes/adminComponents/UsuariosComponents/TablaDeUsuarios'
+import RegistroUsuarios from '../../componentes/adminComponents/UsuariosComponents/RegistroUsuarios'
 
 import '../../css/usuarios.css'
 

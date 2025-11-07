@@ -1,4 +1,5 @@
 const API_URL = 'http://localhost:3100/libreria/usuarios/';
+import { categoriaService } from "./Administrador/Categorias";
 import { usuarioService } from "./Administrador/Usuarios";
 
 const login = async(nombre, contrasena) =>{
@@ -16,6 +17,7 @@ const login = async(nombre, contrasena) =>{
 
 
         usuarioService.setToken(data.token)
+        categoriaService.setToken(data.token)
         return {
             token: data.token,
             usuario: data.usuario,
