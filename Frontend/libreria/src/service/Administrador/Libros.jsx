@@ -31,3 +31,5 @@ class LibrosService extends BaseService{
     };
 
 }
+
+export const libroService = new LibrosService('http://localhost:3100/libreria');

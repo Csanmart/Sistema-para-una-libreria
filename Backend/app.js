@@ -33,6 +33,8 @@ const usuariosRouter = require('./routers/usuarios_routers');
 const categoriasRouter = require('./routers/categorias_routers');
 const librosRouter = require('./routers/libros_routes');
 const prestamosRouter  = require('./routers/prestamos_routers')
+const resumenRouter = require('./routers/resumen_routers')
+
 
 // app.use(usuarios);
 app.use('/libreria',usuariosRouter);
@@ -42,7 +44,8 @@ app.use('/libreria',categoriasRouter);
 app.use('/libreria', librosRouter);
 //app.use(prestamos)
 app.use('/libreria', prestamosRouter);
-
+//app.use(resumen)
+app.use('/libreria', resumenRouter);
 
 //Configuracio del puerto
 app.listen(PORT, ()=>{

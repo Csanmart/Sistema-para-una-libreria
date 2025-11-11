@@ -2,6 +2,7 @@ import '../../css/Dashboard.css'
 import '../../css/categorias.css'
 import TablaCategorias from '../../componentes/adminComponents/CategoriasComponents/TablaCategorias'
 import RegistrarCategorias from '../../componentes/adminComponents/CategoriasComponents/RegistrarCategorias'
+import LibrosPorCategorias from '../../componentes/adminComponents/CategoriasComponents/LibrosPorCategorias'
 
 
 
@@ -30,9 +31,13 @@ export default function Categorias(){
             <section className='cards-section'>
                 <h3>Buscar libros de la categoria</h3>
                 <div className='card'>
-                    
+                    <LibrosPorCategorias/>;
                 </div>
             </section>
+
+            <footer className="end-page">
+                <p>Derechos reservados a csanmart ®️</p>
+            </footer>
         </div>
     )
 };
